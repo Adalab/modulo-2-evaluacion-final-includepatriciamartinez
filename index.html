@@ -1,31 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Evaluación final módulo 2</title>
-    <link rel="stylesheet" href="//beta.adalab.es/resources/stylesheets/all.css" />
-    <link rel="stylesheet" href="/css/main.css" />
-  </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="//beta.adalab.es/resources/stylesheets/all.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <title>Evaluación final módulo 2</title>
+</head>
+
 </html>
+
 <body>
+
   <h1>Buscador de series</h1><br></br>
+
   <main class="js-container">
 
-    <section class="js-input input">
-      <input type="text" id="TVShow" name="TVShow" /><br /><br />
-      <button class="js-btn btn" type="submit" value="Search"/></button><br></br>
+    <section class="js-inputContainer input">
+      <input class="js-inputText inputText" type="text" id="TVShow" name="TVShow" /><br /><br />
+      <input class="js-btn btn" type="submit" value="Search" /><br></br>
     </section>
 
-    <section class="js-list list">
-      <h3 class="js-favListTitle favListTitle">Mis series favoritas</h2>
-      <ul class="js-favList favList">
-       <li class="js-favListItem1">
-         <img src="" alt="imgTvShow"> <p>title</p>
-       </li>
+    <aside class="js-tvShowDataContainer tvShowDataContainer">
+      <ul class="js-tvShowDataList tvShowDataList">
+        <li class="js-tvShowDataItem1" >
+          <h3 class="js-tvShowDataTitle tvShowDataTitle" >título</h3>
+        </li>
       </ul>
+    </aside>
+
+    <section class="js-favList list">
+      <h3 class="js-favListTitle favListTitle">Mis series favoritas</h2>
+        <ul class="js-favListItems favList">
+          <li class="js-favListItem1">
+            <div><img src="" alt="imgTvShow"></div>
+            <h3 class="js-favListTitle favListTitle">_</h3>
+          </li>
+        </ul>
     </section>
-    <aside class="js-tvShowData tvShowData"><p>con el valor del input value cuando escriba la serie</p></aside>
+
   </main>
   <script src="./js/main.js"></script>
 </body>

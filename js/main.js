@@ -4,7 +4,7 @@ console.log('hola mundo');
 
 //VARIABLES
 let tvShows = [];
-const showsEl = document.querySelector('.js-input').value;
+const showsEl = document.querySelector('.js-input');
 console.log(showsEl);
 
 //FUNCIONES
@@ -16,6 +16,7 @@ const getApiData = function () {
     .then(show => {
       tvShows = show;
       console.log(show);
+      paintTvShows();
       // products = data.cart.items;
       //console.log(products);
       //paintProduct(); //ejecutamos aquí paint products porque es donde se ha generado el array products. y lo pongo debajo del console.log por la asincronía.
@@ -27,7 +28,10 @@ const getApiData = function () {
 
 const getHTMLShows = function (show) {
   let accHTML = ''; // es vacío para que se reinicie cada vez que pase por aquí.
-  accHTML += `<ul class="card">`;
+
+
+  accHTML += `<section class="input">`;
+  accHTML += `<input type="text" id=${show.id}" name="TVShow" /><br /><br />`
   accHTML += `<img src=${show.image} class="card__img" alt="Camiseta de ${show.name}" />`;
   accHTML += `<h3 class="card__title">${show.name}</h3>`;
   accHTML += `<button id=${product.id} class="js-btn card__btn">Añadir a la cesta</button>`;
