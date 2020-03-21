@@ -7,9 +7,7 @@ let favShows = [];
 // VARIABLES DE JS Y HTML
 const showsEl = document.querySelector('.js-tvShowDataList');
 const favShowsEl = document.querySelector('.js-favListItems');
-const showsListListenerEl = document.querySelectorAll('.js-tvShowDataList');
 
-//FUNCIONES
 //Me traigo la API
 const getApiData = function() {
   fetch('http://api.tvmaze.com/search/shows?q=dexter') //aquí meto url de api que está especificada en documentación según me espefique en ella.
@@ -27,7 +25,7 @@ const getApiData = function() {
 const getHTMLShows = function(serie) {
   let accHTML = '';
   // es vacío para que se reinicie cada vez que pase por aquí.
-  accHTML += `<li>`;
+  accHTML += `<li class="js-tvShowDataListItem">`;
   accHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   accHTML += `<h3>${serie.show.name}</h3>`;
   accHTML += `</li>`;
@@ -40,12 +38,26 @@ const paintTvShows = function() {
     accTvShow += getHTMLShows(tvShows[index]);
   }
   showsEl.innerHTML = accTvShow;
+  listenClickShowList();
+};
+
+//funcion handler shows:
+const handlerShowsList = function(event) {
+  console.log('me han clickado y el evento es:', event.currentTarget);
+};
+
+const listenClickShowList = function() {
+  const showsListListenerEl = document.querySelectorAll('.js-tvShowDataListItem');
+  for (let index = 0; index < showsListListenerEl.length; index++) {
+    showsListListenerEl[index].addEventListener('click', handlerShowsList);
+  }
 };
 
 const getHTMLfavShows = function(serie) {
   let codeHTML = '';
-  codeHTML += `<li>`;
+  codeHTML += `<li class="js-tvShowDataListFavItem">`;
   codeHTML += `<h3>${serie.show.name}</h3>`;
+  codeHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   codeHTML += `</li>`;
   return codeHTML;
 };
@@ -56,16 +68,18 @@ const paintFavShows = function() {
     accFavTvShow += getHTMLfavShows(favShows[index]);
   }
   favShowsEl.innerHTML = accFavTvShow;
+  listenClickFavList();
 };
 
-//funcion handler:
-const handlerShowsList = function(event) {
-  cons.log('me han clickado y el evento es:', event);
+//funcion handler shows:
+const handlerFavList = function(event) {
+  console.log('me han clickado y el evento es:', event.currentTarget);
 };
 
-const listenButtons = function() {
-  for (let index = 0; index < showsListListenerEl.length; index++) {
-    showsListListenerEl[index].addEventListener('click', handlerShowsList);
+const listenClickFavList = function() {
+  const favListListenerEl = document.querySelectorAll('.js-tvShowDataListFavItem');
+  for (let index = 0; index < favListListenerEl.length; index++) {
+    favListListenerEl[index].addEventListener('click', handlerFavList);
   }
 };
 
