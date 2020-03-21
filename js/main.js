@@ -17,7 +17,6 @@ const getApiData = function() {
       // console.log(data); // es para comprobar que me funciona y cómo recibo la info
       paintTvShows(); // ejecutamos aquí paint products porque es donde se ha generado el array products. y lo pongo debajo del console.log por la asincronía.
       // las dos siguientes líneas son fake
-      favShows = tvShows.slice(0, 2);
       paintFavShows();
     });
 };
@@ -45,6 +44,10 @@ const paintTvShows = function() {
 const handlerShowsList = function(event) {
   console.log('me han clickado y el evento es:', event);
   console.log('me han clickado y el evento es:', event.currentTarget);
+  // aquí estoy añadiendo la primera serie a favoritos de manera fake
+  favShows.push(tvShows[0]);
+  paintTvShows();
+  paintFavShows();
 };
 
 const listenClickShowList = function() {
@@ -76,6 +79,12 @@ const paintFavShows = function() {
 //funcion handler faShows:
 const handlerFavList = function(event) {
   console.log('me han clickado y el evento es:', event.currentTarget);
+  // aquí estoy borrando la primera serie de favoritos de manera fake
+  if (favShows.length) {
+    favShows.splice(0, 1);
+  }
+  paintTvShows();
+  paintFavShows();
 };
 
 const listenClickFavList = function() {
