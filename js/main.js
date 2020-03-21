@@ -1,21 +1,19 @@
 'use-strict';
 
-console.log('hola mundo');
-
 //VARIABLES
 let tvShows = [];
-const showsEl = document.querySelector('.js-input');
-console.log(showsEl);
+const showsEl = document.querySelector('.js-tvShowDataList');
+//console.log(showsEl);
 
 //FUNCIONES
 //Me traigo la API
 const getApiData = function () {
 
-  fetch('http://api.tvmaze.com/search/shows?q=fleabag') //aquí meto url de api que está especificada en documentación según me espefique en ella.
+  fetch('http://api.tvmaze.com/search/shows?q=dexter') //aquí meto url de api que está especificada en documentación según me espefique en ella.
     .then(response => response.json())
-    .then(show => {
-      tvShows = show;
-      console.log(show);
+    .then(data => {
+      tvShows = data;
+      console.log(data);
       paintTvShows();
       // products = data.cart.items;
       //console.log(products);
@@ -26,16 +24,12 @@ const getApiData = function () {
 
 };
 
-const getHTMLShows = function (show) {
+const getHTMLShows = function (data) {
   let accHTML = ''; // es vacío para que se reinicie cada vez que pase por aquí.
-
-
-  accHTML += `<section class="input">`;
-  accHTML += `<input type="text" id=${show.id}" name="TVShow" /><br /><br />`
-  accHTML += `<img src=${show.image} class="card__img" alt="Camiseta de ${show.name}" />`;
-  accHTML += `<h3 class="card__title">${show.name}</h3>`;
-  accHTML += `<button id=${product.id} class="js-btn card__btn">Añadir a la cesta</button>`;
-  accHTML += `</article>`;
+  accHTML += `<li class="js-tvShowDataItem1">`;
+  accHTML += `<img src=${data.show.image} class="js-ShowDataImage" alt="Carátula de ${data.show.name}" />`;
+  accHTML += `<h3 class="js-tvShowdataTitle">${data.show.name}</h3>`;
+  accHTML += `</li>`;
   return accHTML; //ojo que no se te olvide el return porque sino no te lo pinta.
 }
 
@@ -43,9 +37,9 @@ const getHTMLShows = function (show) {
 const paintTvShows = function (tvShow) {
   let accTvShow = '';
   for (let index = 0; index < tvShows.length; index++) {
-    accTvShow += getHTMLShow(tvShows[index]);
+    accTvShow += getHTMLShows(tvShows[index]);
   }
-  showsEl.innerHTML.value = accTvShow;
+  showsEl.value = accTvShow;
   //listenBtn();
 }
 
