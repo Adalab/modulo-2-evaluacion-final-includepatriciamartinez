@@ -7,7 +7,6 @@ let favShows = [];
 // VARIABLES DE JS Y HTML
 const showsEl = document.querySelector('.js-tvShowDataList');
 const favShowsEl = document.querySelector('.js-favListItems');
-const showsListListenerEl = document.querySelectorAll('.js-tvShowDataList');
 
 //FUNCIONES
 //Me traigo la API
@@ -16,7 +15,7 @@ const getApiData = function() {
     .then(response => response.json())
     .then(data => {
       tvShows = data;
-      console.log(data); // es para comprobar que me funciona y cómo recibo la info
+      // console.log(data); // es para comprobar que me funciona y cómo recibo la info
       paintTvShows(); // ejecutamos aquí paint products porque es donde se ha generado el array products. y lo pongo debajo del console.log por la asincronía.
       // las dos siguientes líneas son fake
       favShows = tvShows.slice(0, 2);
@@ -27,7 +26,7 @@ const getApiData = function() {
 const getHTMLShows = function(serie) {
   let accHTML = '';
   // es vacío para que se reinicie cada vez que pase por aquí.
-  accHTML += `<li>`;
+  accHTML += `<li class="js-tvShowDataListItem">`;
   accHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   accHTML += `<h3>${serie.show.name}</h3>`;
   accHTML += `</li>`;
@@ -40,6 +39,21 @@ const paintTvShows = function() {
     accTvShow += getHTMLShows(tvShows[index]);
   }
   showsEl.innerHTML = accTvShow;
+  listenButtons();
+};
+
+const listenButtons = function() {
+  const showsListListenerEl = document.querySelectorAll('.js-tvShowDataListItem');
+  // console.log('Cuántos LI he encontrado:', showsListListenerEl);
+  for (let index = 0; index < showsListListenerEl.length; index++) {
+    showsListListenerEl[index].addEventListener('click', handlerShowsList);
+  }
+};
+
+//funcion handler:
+const handlerShowsList = function(event) {
+  console.log('me han clickado y el evento es:', event);
+  console.log('me han clickado y el elemento clickado es:', event.currentTarget);
 };
 
 const getHTMLfavShows = function(serie) {
@@ -56,17 +70,6 @@ const paintFavShows = function() {
     accFavTvShow += getHTMLfavShows(favShows[index]);
   }
   favShowsEl.innerHTML = accFavTvShow;
-};
-
-//funcion handler:
-const handlerShowsList = function(event) {
-  cons.log('me han clickado y el evento es:', event);
-};
-
-const listenButtons = function() {
-  for (let index = 0; index < showsListListenerEl.length; index++) {
-    showsListListenerEl[index].addEventListener('click', handlerShowsList);
-  }
 };
 
 // ARRANCAMOS LA PÁGINA
