@@ -17,22 +17,21 @@
 
   <main class="js-container">
 
-    <section class="js-inputContainer input">
-      <input class="js-inputText inputText" type="text" id="TVShow" name="TVShow" /><br /><br />
+    <section class="js-inputContainer">
+      <input class="js-inputText" type="text" id="TVShow" name="TVShow" /><br /><br />
       <input class="js-btn btn" type="submit" value="Search" /><br></br>
     </section>
-
+    
+    <aside class="js-tvShowDataContainer">
+      <h3 class="js-favListTitle">Mis series buscadas</h3>
+      <ul class="js-tvShowDataList tvShowDataList"></ul>
+    </aside>
+    
     <section class="js-favList list">
-      <h3 class="js-favListTitle favListTitle">Mis series favoritas</h3>
+      <h3 class="js-favListTitle">Mis series favoritas</h3>
       <ul class="js-favListItems favList">      
       </ul>
     </section>
-
-    <aside class="js-tvShowDataContainer tvShowDataContainer">
-      <h3 class="js-favListTitle favListTitle">Mis series buscadas</h3>
-      <ul class="js-tvShowDataList tvShowDataList"></ul>
-    </aside>
-
   </main>
   <script src="./js/main.js"></script>
 </body>

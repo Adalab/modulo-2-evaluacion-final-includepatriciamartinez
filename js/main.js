@@ -6,7 +6,8 @@ let favShows = [];
 
 // VARIABLES DE JS Y HTML
 const showsEl = document.querySelector('.js-tvShowDataList');
-const favShowsEl = document.querySelector('.js-favListItem');
+const favShowsEl = document.querySelector('.js-favListItems');
+const showsListListenerEl = document.querySelectorAll('.js-tvShowDataList');
 
 //FUNCIONES
 //Me traigo la API
@@ -26,9 +27,9 @@ const getApiData = function() {
 const getHTMLShows = function(serie) {
   let accHTML = '';
   // es vacío para que se reinicie cada vez que pase por aquí.
-  accHTML += `<li class="js-tvShowDataItem1">`;
+  accHTML += `<li>`;
   accHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
-  accHTML += `<h3 class="js-tvShowdataTitle">${serie.show.name}</h3>`;
+  accHTML += `<h3>${serie.show.name}</h3>`;
   accHTML += `</li>`;
   return accHTML; //ojo que no se te olvide el return porque sino no te lo pinta.
 };
@@ -43,8 +44,8 @@ const paintTvShows = function() {
 
 const getHTMLfavShows = function(serie) {
   let codeHTML = '';
-  codeHTML += `<li class="js-favListItem1">`;
-  codeHTML += `<h3 class="js-favListTitle">${serie.show.name}</h3>`;
+  codeHTML += `<li>`;
+  codeHTML += `<h3>${serie.show.name}</h3>`;
   codeHTML += `</li>`;
   return codeHTML;
 };
@@ -55,6 +56,17 @@ const paintFavShows = function() {
     accFavTvShow += getHTMLfavShows(favShows[index]);
   }
   favShowsEl.innerHTML = accFavTvShow;
+};
+
+//funcion handler:
+const handlerShowsList = function(event) {
+  cons.log('me han clickado y el evento es:', event);
+};
+
+const listenButtons = function() {
+  for (let index = 0; index < showsListListenerEl.length; index++) {
+    showsListListenerEl[index].addEventListener('click', handlerShowsList);
+  }
 };
 
 // ARRANCAMOS LA PÁGINA
