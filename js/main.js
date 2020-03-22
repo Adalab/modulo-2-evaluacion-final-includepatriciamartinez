@@ -14,7 +14,9 @@ const textShowEl = document.querySelector('.js-inputText');
 
 //Me traigo la API
 const getApiData = function () {
-  const inputTextValue = parseInt(textShowEl.value);
+  const inputTextValue = textShowEl.value;
+  console.log(inputTextValue);
+  console.log('me han clickado y el evento es:', event);
   fetch('http://api.tvmaze.com/search/shows?q=' + inputTextValue) //aquí meto url de api que está especificada en documentación según me espefique en ella.
     .then(response => response.json())
     .then(data => {
@@ -29,27 +31,16 @@ const getApiData = function () {
 
 //función handler getApiData cuando clicko en Search:
 
-const handlerClickGetApiData = function (event) {
-  console.log('me han clickado y el evento es:', event);
-  //declaro const input.value( ojo que sale string):
-  //todo value de input sale como string a menos que sea de tipo numberparseInt para convertirlo.
-}
-
 const listenClickSearchBtn = function () {
   const btnSearchEl = document.querySelector('.js-btn');
-  btnSearchEl.addEventListener('click', handlerClickGetApiData);
+  btnSearchEl.addEventListener('click', getApiData);
 };
-
-
-
-
-
 
 const getHTMLShows = function (serie) {
   let accHTML = '';
   // es vacío para que se reinicie cada vez que pase por aquí.
   accHTML += `<li class="js-tvShowDataListItem">`;
-  accHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
+  //accHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   accHTML += `<h3>${serie.show.name}</h3>`;
   accHTML += `</li>`;
   return accHTML; //ojo que no se te olvide el return porque sino no te lo pinta.
@@ -88,7 +79,7 @@ const getHTMLfavShows = function (serie) {
   let codeHTML = '';
   codeHTML += `<li class="js-tvShowDataListFavItem">`;
   codeHTML += `<h3>${serie.show.name}</h3>`;
-  codeHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
+  //codeHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   codeHTML += `</li>`;
   return codeHTML;
 };
@@ -130,19 +121,14 @@ const setInLocalStorage = function () {
 
 const getFromLocalStorage = function () {
   const localStorageFavShows = localStorage.getItem('favShows');
-  console.log(localStorageFavShows);
   if (localStorageFavShows != null) {
     favShows = JSON.parse(localStorageFavShows);
     paintFavShows();
   }
 };
 
-const setInLocalStorage = function () {
-  const stringifyFavShows = JSON.stringify(favShows);
-  localStorage.setItem('favShows', stringifyFavShows);
-};
-
 // ARRANCAMOS LA PÁGINA
 // getApiData();
 getFromLocalStorage();
+listenClickSearchBtn();
 // paintFavShows();
