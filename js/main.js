@@ -39,7 +39,7 @@ const listenClickSearchBtn = function () {
 const getHTMLShows = function (serie) {
   let accHTML = '';
   // es vacío para que se reinicie cada vez que pase por aquí.
-  accHTML += `<li class="js-tvShowDataListItem">`;
+  accHTML += `<li class="js-tvShowDataListItem" id="${serie.show.id}">`;
   //accHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   accHTML += `<h3>${serie.show.name}</h3>`;
   accHTML += `</li>`;
@@ -58,10 +58,21 @@ const paintTvShows = function () {
 
 //funcion handler shows:
 const handlerShowsList = function (event) {
-  console.log('me han clickado y el evento es:', event);
-  console.log('me han clickado y el evento es:', event.currentTarget);
-  // aquí estoy añadiendo la primera serie a favoritos de manera fake
-  favShows.push(tvShows[1]);
+  // console.log('me han clickado y el evento es:', event);
+  // console.log('me han clickado y el evento es:', event.currentTarget, event.currentTarget.id);
+  // AQUÍ EMPIEZA TU CÓDIGO
+  const tvShowId = parseInt(event.currentTarget.id);
+  console.log('tvShowId', tvShowId);
+
+  // partimos de un id (dni) y quiero obtener la serie entera
+  // para ello tienes que buscar en tvShows la serie que tenga el id tvShowId
+
+  // consolea y sabrás si está bien si en consola aparee un número mayor o igual que 0
+  // si aparece un -1 es que no lo estás encontrando
+
+  // no nos preocupamos todavía de los favoritos
+
+  // AQUÍ ACABA TU CÓDIGO
   paintTvShows();
   paintFavShows();
   setInLocalStorage();
