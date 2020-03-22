@@ -4,13 +4,18 @@
 let tvShows = [];
 let favShows = [];
 
+
 // VARIABLES DE JS Y HTML
 const showsEl = document.querySelector('.js-tvShowDataList');
 const favShowsEl = document.querySelector('.js-favListItems');
+const textShowEl = document.querySelector('.js-inputText');
+
+
 
 //Me traigo la API
 const getApiData = function () {
-  fetch('http://api.tvmaze.com/search/shows?q=dexter') //aquí meto url de api que está especificada en documentación según me espefique en ella.
+  const inputTextValue = parseInt(textShowEl.value);
+  fetch('http://api.tvmaze.com/search/shows?q=' + inputTextValue) //aquí meto url de api que está especificada en documentación según me espefique en ella.
     .then(response => response.json())
     .then(data => {
       tvShows = data;
@@ -18,8 +23,27 @@ const getApiData = function () {
       paintTvShows(); // ejecutamos aquí paint products porque es donde se ha generado el array products. y lo pongo debajo del console.log por la asincronía.
       // las dos siguientes líneas son fake
       paintFavShows();
+
     });
 };
+
+//función handler getApiData cuando clicko en Search:
+
+const handlerClickGetApiData = function (event) {
+  console.log('me han clickado y el evento es:', event);
+  //declaro const input.value( ojo que sale string):
+  //todo value de input sale como string a menos que sea de tipo numberparseInt para convertirlo.
+}
+
+const listenClickSearchBtn = function () {
+  const btnSearchEl = document.querySelector('.js-btn');
+  btnSearchEl.addEventListener('click', handlerClickGetApiData);
+};
+
+
+
+
+
 
 const getHTMLShows = function (serie) {
   let accHTML = '';
@@ -38,6 +62,7 @@ const paintTvShows = function () {
   }
   showsEl.innerHTML = accTvShow;
   listenClickShowList();
+
 };
 
 //funcion handler shows:
@@ -77,7 +102,7 @@ const paintFavShows = function () {
   listenClickFavList();
 };
 
-//funcion handler faShows:
+//funcion handler favShows:
 const handlerFavList = function (event) {
   console.log('me han clickado y el evento es:', event.currentTarget);
   // aquí estoy borrando la primera serie de favoritos de manera fake
@@ -104,7 +129,7 @@ const getFromLocalStorage = function () {
     favShows = JSON.parse(localStorageFavShows);
     paintFavShows();
   }
-}
+};
 
 const setInLocalStorage = function () {
   const stringifyFavShows = JSON.stringify(favShows);
@@ -115,4 +140,3 @@ const setInLocalStorage = function () {
 // ARRANCAMOS LA PÁGINA
 getApiData();
 getFromLocalStorage();
-paintFavShows();
