@@ -9,7 +9,7 @@ const showsEl = document.querySelector('.js-tvShowDataList');
 const favShowsEl = document.querySelector('.js-favListItems');
 
 //Me traigo la API
-const getApiData = function() {
+const getApiData = function () {
   fetch('http://api.tvmaze.com/search/shows?q=dexter') //aquí meto url de api que está especificada en documentación según me espefique en ella.
     .then(response => response.json())
     .then(data => {
@@ -21,7 +21,7 @@ const getApiData = function() {
     });
 };
 
-const getHTMLShows = function(serie) {
+const getHTMLShows = function (serie) {
   let accHTML = '';
   // es vacío para que se reinicie cada vez que pase por aquí.
   accHTML += `<li class="js-tvShowDataListItem">`;
@@ -31,7 +31,7 @@ const getHTMLShows = function(serie) {
   return accHTML; //ojo que no se te olvide el return porque sino no te lo pinta.
 };
 
-const paintTvShows = function() {
+const paintTvShows = function () {
   let accTvShow = '';
   for (let index = 0; index < tvShows.length; index++) {
     accTvShow += getHTMLShows(tvShows[index]);
@@ -41,16 +41,17 @@ const paintTvShows = function() {
 };
 
 //funcion handler shows:
-const handlerShowsList = function(event) {
+const handlerShowsList = function (event) {
   console.log('me han clickado y el evento es:', event);
   console.log('me han clickado y el evento es:', event.currentTarget);
   // aquí estoy añadiendo la primera serie a favoritos de manera fake
   favShows.push(tvShows[0]);
   paintTvShows();
   paintFavShows();
+  setInLocalStorage();
 };
 
-const listenClickShowList = function() {
+const listenClickShowList = function () {
   const showsListListenerEl = document.querySelectorAll('.js-tvShowDataListItem');
   // console.log('Cuántos LI he encontrado:', showsListListenerEl)
   for (let index = 0; index < showsListListenerEl.length; index++) {
@@ -58,7 +59,7 @@ const listenClickShowList = function() {
   }
 };
 
-const getHTMLfavShows = function(serie) {
+const getHTMLfavShows = function (serie) {
   let codeHTML = '';
   codeHTML += `<li class="js-tvShowDataListFavItem">`;
   codeHTML += `<h3>${serie.show.name}</h3>`;
@@ -67,7 +68,7 @@ const getHTMLfavShows = function(serie) {
   return codeHTML;
 };
 
-const paintFavShows = function() {
+const paintFavShows = function () {
   let accFavTvShow = '';
   for (let index = 0; index < favShows.length; index++) {
     accFavTvShow += getHTMLfavShows(favShows[index]);
@@ -77,7 +78,7 @@ const paintFavShows = function() {
 };
 
 //funcion handler faShows:
-const handlerFavList = function(event) {
+const handlerFavList = function (event) {
   console.log('me han clickado y el evento es:', event.currentTarget);
   // aquí estoy borrando la primera serie de favoritos de manera fake
   if (favShows.length) {
@@ -85,14 +86,33 @@ const handlerFavList = function(event) {
   }
   paintTvShows();
   paintFavShows();
+  setInLocalStorage();
 };
 
-const listenClickFavList = function() {
+const listenClickFavList = function () {
   const favListListenerEl = document.querySelectorAll('.js-tvShowDataListFavItem');
   for (let index = 0; index < favListListenerEl.length; index++) {
     favListListenerEl[index].addEventListener('click', handlerFavList);
   }
 };
 
+//función local storage
+
+const getFromLocalStorage = function () {
+  const localStorageFavShows = localStorage.getItem('favShows');
+  if (localStorageFavShows != null) {
+    favShows = JSON.parse(localStorageFavShows);
+    paintFavShows();
+  }
+}
+
+const setInLocalStorage = function () {
+  const stringifyFavShows = JSON.stringify(favShows);
+  localStorage.setItem('favShows', stringifyFavShows);
+};
+
+
 // ARRANCAMOS LA PÁGINA
 getApiData();
+getFromLocalStorage();
+paintFavShows();
