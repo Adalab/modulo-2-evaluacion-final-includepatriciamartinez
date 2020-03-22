@@ -69,11 +69,10 @@ const handlerShowsList = function (event) {
   if (tvFavClickedIndex === -1) { // si no está en fav meto
     // meto con push el tvShow clickado
     // Patri tienes que escribir aquí una sola línea
-
-    // para saber que te funciona el siguiente console tiene que [{...}]
-    console.log(favShows)
-  } else { // si está en fav saco
-    // saco con splice
+    favShows.push(tvShows[tvShowClickedIndex])
+    console.log(favShows); // para saber que te funciona el siguiente console tiene que [{...}]
+  } else {
+    favShows.splice(tvFavClickedIndex, 1); // si está en fav saco con splice
   }
 
   // AQUÍ ACABA TU CÓDIGO
