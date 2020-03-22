@@ -62,17 +62,19 @@ const handlerShowsList = function (event) {
   // console.log('me han clickado y el evento es:', event.currentTarget, event.currentTarget.id);
   // AQUÍ EMPIEZA TU CÓDIGO
   const tvShowClickedId = parseInt(event.currentTarget.id); //traduzco a numero con el parceInt
-  console.log('tvShowId', tvShowClickedId);
+  const tvShowClickedIndex = tvShows.findIndex(tvShows => tvShows.show.id === tvShowClickedId);
+  const tvFavClickedIndex = favShows.findIndex(favShows => favShows.show.id === tvShowClickedId);
+  console.log(tvShowClickedIndex, tvFavClickedIndex);
 
-  // partimos de un id (dni) y quiero obtener la serie entera
-  // para ello tienes que buscar en tvShows la serie que tenga el id tvShowClickedId
-  const indexTvShow = tvShows.findIndex(tvShows => tvShows.id === tvShowClickedId);
+  if (tvFavClickedIndex === -1) { // si no está en fav meto
+    // meto con push el tvShow clickado
+    // Patri tienes que escribir aquí una sola línea
 
-  // consolea y sabrás si está bien si en consola aparee un número mayor o igual que 0
-  console.log(indexTvShow);
-  // si aparece un -1 es que no lo estás encontrando
-
-  // no nos preocupamos todavía de los favoritos
+    // para saber que te funciona el siguiente console tiene que [{...}]
+    console.log(favShows)
+  } else { // si está en fav saco
+    // saco con splice
+  }
 
   // AQUÍ ACABA TU CÓDIGO
   paintTvShows();
