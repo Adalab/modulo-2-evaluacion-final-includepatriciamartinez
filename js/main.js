@@ -13,22 +13,15 @@ const textShowEl = document.querySelector('.js-inputText');
 
 
 //Me traigo la API
-<<<<<<< HEAD
 const getApiData = function () {
   const inputTextValue = parseInt(textShowEl.value);
   fetch('http://api.tvmaze.com/search/shows?q=' + inputTextValue) //aquí meto url de api que está especificada en documentación según me espefique en ella.
-=======
-const getApiData = function() {
-  console.log('Me han clickado en Search');
-  fetch('http://api.tvmaze.com/search/shows?q=') //aquí meto url de api que está especificada en documentación según me espefique en ella.
->>>>>>> 581b1e78e42bf7fa5a3be0f896bf80269c0c9f3a
     .then(response => response.json())
     .then(data => {
       tvShows = data;
       // console.log(data); // es para comprobar que me funciona y cómo recibo la info
       paintTvShows(); // ejecutamos aquí paint products porque es donde se ha generado el array products. y lo pongo debajo del console.log por la asincronía.
       // las dos siguientes líneas son fake
-<<<<<<< HEAD
       paintFavShows();
 
     });
@@ -53,13 +46,6 @@ const listenClickSearchBtn = function () {
 
 
 const getHTMLShows = function (serie) {
-=======
-      // paintFavShows();
-    });
-};
-
-const getHTMLShows = function(serie) {
->>>>>>> 581b1e78e42bf7fa5a3be0f896bf80269c0c9f3a
   let accHTML = '';
   // es vacío para que se reinicie cada vez que pase por aquí.
   accHTML += `<li class="js-tvShowDataListItem">`;
@@ -69,7 +55,7 @@ const getHTMLShows = function(serie) {
   return accHTML; //ojo que no se te olvide el return porque sino no te lo pinta.
 };
 
-const paintTvShows = function() {
+const paintTvShows = function () {
   let accTvShow = '';
   for (let index = 0; index < tvShows.length; index++) {
     accTvShow += getHTMLShows(tvShows[index]);
@@ -80,7 +66,7 @@ const paintTvShows = function() {
 };
 
 //funcion handler shows:
-const handlerShowsList = function(event) {
+const handlerShowsList = function (event) {
   console.log('me han clickado y el evento es:', event);
   console.log('me han clickado y el evento es:', event.currentTarget);
   // aquí estoy añadiendo la primera serie a favoritos de manera fake
@@ -90,7 +76,7 @@ const handlerShowsList = function(event) {
   setInLocalStorage();
 };
 
-const listenClickShowList = function() {
+const listenClickShowList = function () {
   const showsListListenerEl = document.querySelectorAll('.js-tvShowDataListItem');
   // console.log('Cuántos LI he encontrado:', showsListListenerEl)
   for (let index = 0; index < showsListListenerEl.length; index++) {
@@ -98,7 +84,7 @@ const listenClickShowList = function() {
   }
 };
 
-const getHTMLfavShows = function(serie) {
+const getHTMLfavShows = function (serie) {
   let codeHTML = '';
   codeHTML += `<li class="js-tvShowDataListFavItem">`;
   codeHTML += `<h3>${serie.show.name}</h3>`;
@@ -107,7 +93,7 @@ const getHTMLfavShows = function(serie) {
   return codeHTML;
 };
 
-const paintFavShows = function() {
+const paintFavShows = function () {
   let accFavTvShow = '';
   for (let index = 0; index < favShows.length; index++) {
     accFavTvShow += getHTMLfavShows(favShows[index]);
@@ -116,13 +102,8 @@ const paintFavShows = function() {
   listenClickFavList();
 };
 
-<<<<<<< HEAD
 //funcion handler favShows:
 const handlerFavList = function (event) {
-=======
-//funcion handler faShows:
-const handlerFavList = function(event) {
->>>>>>> 581b1e78e42bf7fa5a3be0f896bf80269c0c9f3a
   console.log('me han clickado y el evento es:', event.currentTarget);
   // aquí estoy borrando la primera serie de favoritos de manera fake
   if (favShows.length) {
@@ -133,7 +114,7 @@ const handlerFavList = function(event) {
   setInLocalStorage();
 };
 
-const listenClickFavList = function() {
+const listenClickFavList = function () {
   const favListListenerEl = document.querySelectorAll('.js-tvShowDataListFavItem');
   for (let index = 0; index < favListListenerEl.length; index++) {
     favListListenerEl[index].addEventListener('click', handlerFavList);
@@ -142,34 +123,26 @@ const listenClickFavList = function() {
 
 //función local storage
 
-const setInLocalStorage = function() {
+const setInLocalStorage = function () {
   const stringifyFavShows = JSON.stringify(favShows);
   localStorage.setItem('favShows', stringifyFavShows);
 };
 
-const getFromLocalStorage = function() {
+const getFromLocalStorage = function () {
   const localStorageFavShows = localStorage.getItem('favShows');
   console.log(localStorageFavShows);
   if (localStorageFavShows != null) {
     favShows = JSON.parse(localStorageFavShows);
     paintFavShows();
   }
-<<<<<<< HEAD
 };
 
 const setInLocalStorage = function () {
   const stringifyFavShows = JSON.stringify(favShows);
   localStorage.setItem('favShows', stringifyFavShows);
-=======
->>>>>>> 581b1e78e42bf7fa5a3be0f896bf80269c0c9f3a
 };
 
 // ARRANCAMOS LA PÁGINA
-<<<<<<< HEAD
-getApiData();
-getFromLocalStorage();
-=======
 // getApiData();
 getFromLocalStorage();
 // paintFavShows();
->>>>>>> 581b1e78e42bf7fa5a3be0f896bf80269c0c9f3a
