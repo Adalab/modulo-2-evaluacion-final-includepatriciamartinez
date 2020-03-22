@@ -61,13 +61,15 @@ const handlerShowsList = function (event) {
   // console.log('me han clickado y el evento es:', event);
   // console.log('me han clickado y el evento es:', event.currentTarget, event.currentTarget.id);
   // AQUÍ EMPIEZA TU CÓDIGO
-  const tvShowId = parseInt(event.currentTarget.id);
-  console.log('tvShowId', tvShowId);
+  const tvShowClickedId = parseInt(event.currentTarget.id); //traduzco a numero con el parceInt
+  console.log('tvShowId', tvShowClickedId);
 
   // partimos de un id (dni) y quiero obtener la serie entera
-  // para ello tienes que buscar en tvShows la serie que tenga el id tvShowId
+  // para ello tienes que buscar en tvShows la serie que tenga el id tvShowClickedId
+  const indexTvShow = tvShows.findIndex(tvShows => tvShows.id === tvShowClickedId);
 
   // consolea y sabrás si está bien si en consola aparee un número mayor o igual que 0
+  console.log(indexTvShow);
   // si aparece un -1 es que no lo estás encontrando
 
   // no nos preocupamos todavía de los favoritos
