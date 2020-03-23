@@ -35,8 +35,7 @@ const getHTMLShows = function (serie) {
   // es vacío para que se reinicie cada vez que pase por aquí.
   accHTML += `<li class="js-tvShowDataListItem" id="${serie.show.id}">`;
   if (serie.show.image === null) {
-    accHTML += `<img src="https://via.placeholder.com/210x295/ffffff/666666/?
-    text=TV" class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
+    accHTML += `<img src="https://onewindows.es/wp-content/uploads/2012/12/calico_electronico.png" class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   } else {
     accHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   }
@@ -85,8 +84,7 @@ const getHTMLfavShows = function (serie) {
   codeHTML += `<li class="js-tvShowDataListFavItem" id="${serie.show.id}">`;
   codeHTML += `<h3>${serie.show.name}</h3>`;
   if (serie.show.image === null) {
-    codeHTML += `<img src="https://via.placeholder.com/210x295/ffffff/666666/?
-    text=TV" class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
+    codeHTML += `<img src="https://onewindows.es/wp-content/uploads/2012/12/calico_electronico.png" class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   } else {
     codeHTML += `<img src=${serie.show.image.medium} class="js-ShowDataImage" alt="Carátula de ${serie.show.name}" />`;
   }
